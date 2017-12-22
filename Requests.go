@@ -1,20 +1,18 @@
 package main
 
 import (
-	"net/http"
-	"fmt"
+	"github.com/PuerkitoBio/goquery"
+	"log"
 )
 
-func get(link string) {
+func getDoc(link string) *goquery.Document {
 
-	resp, err := http.Get(link)
+	doc, err := goquery.NewDocument(link)
 
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 
-	defer resp.Body.Close()
+	return doc
 
-	var res string = formatResponse(resp)
-	fmt.Println(res)
 }

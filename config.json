@@ -1,0 +1,5 @@
+{
+  "sites" : ["http://telugua2z.in", "https://en.wikipedia.org/wiki/Website"],
+  "selectors" : ["a", "title"],
+  "size" : true
+}

@@ -5,10 +5,21 @@ import (
 	"strings"
 	"io/ioutil"
 	"net/http"
+	"github.com/PuerkitoBio/goquery"
 )
 
+type Config struct {
+	urls []string
+}
+
 func Init() {
-	get("http://naasongs.com")
+
+	docs := make(map[string]*goquery.Document)
+	docs["http://naasongs.com"] = getDoc("http://telugua2z.in")
+	docs["http://naasongs.com"].Find("a").Each(func(indx int, s *goquery.Selection){
+		fmt.Println(s.Text())
+	})
+
 }
 
 func LoadConfig(conf string) {
@@ -24,10 +35,12 @@ func formatResponse(resp *http.Response) string {
 		panic(err)
 	}
 	return string(body)
-	
+
 }
 
 func keepLines(s string, n int) string {
+
 	result := strings.Join(strings.Split(s, "\n")[:n], "\n")
 	return strings.Replace(result, "\r", "", -1)
+
 }
